@@ -43,20 +43,20 @@ def solve(wordsearch, wordlist):
 
 
 def main():
-    '''Parse commandline arguments and run program'''
+    '''Parse command-line arguments and run program'''
     parser = argparse.ArgumentParser()
-    parser.add_argument('-w', '--wordsearch',
-                        help='File location of wordsearch, is required',
+    parser.add_argument('-w', '--word-search',
+                        help='File location of word search, is required',
                         required=True)
-    parser.add_argument('-l', '--wordlist',
-                        help='File location of wordlist, is required',
+    parser.add_argument('-l', '--word-list',
+                        help='File location of word list, is required',
                         required=True)
     args = parser.parse_args()
     wordsearch = list()
-    with open(args.wordsearch) as file:
+    with open(args.word_search) as file:
         for line in file.read().splitlines():
             wordsearch.append(''.join(line.split()).lower())
-    with open(args.wordlist) as file:
+    with open(args.word_list) as file:
         wordlist = file.read().lower().split()
         wordlist = set(word for word in wordlist if len(word) > 3)
     solve(wordsearch, wordlist)
