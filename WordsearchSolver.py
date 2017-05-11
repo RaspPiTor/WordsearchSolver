@@ -11,6 +11,30 @@ def solve(wordsearch, wordlist):
         down = ''.join(line[i] for line in wordsearch)
         lines.append(down)
         lines.append(down[::-1])
+    yline = [[0, i] for i in range(len(wordsearch))]
+    xline = [[i, 0] for i in range(len(wordsearch[0]))]
+    for xvar, yvar in xline + yline:
+        line = []
+        try:
+            while True:
+                line.append(wordsearch[yvar][xvar])
+                xvar += 1
+                yvar += 1
+        except IndexError:
+            pass
+        lines.append(''.join(line))
+        lines.append(''.join(line)[::-1])
+    for xvar, yvar in xline + yline:
+        line = []
+        try:
+            while True and yvar >= 0:
+                line.append(wordsearch[yvar][xvar])
+                xvar += 1
+                yvar -= 1
+        except IndexError:
+            pass
+        lines.append(''.join(line))
+        lines.append(''.join(line)[::-1])
     for line in lines:
         matches = [word for word in wordlist if word in line]
         if matches:
