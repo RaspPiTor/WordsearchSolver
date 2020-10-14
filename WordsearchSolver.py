@@ -51,6 +51,9 @@ def main():
     parser.add_argument('-l', '--word-list',
                         help='File location of word list, is required',
                         required=True)
+    parser.add_argument('-m', '--minimum-len',
+                        help='Minimium length of used words, defaults to 2',
+                        default=2, type=int)
     args = parser.parse_args()
     wordsearch = list()
     with open(args.word_search) as file:
@@ -58,7 +61,7 @@ def main():
             wordsearch.append(''.join(line.split()).lower())
     with open(args.word_list) as file:
         wordlist = file.read().lower().split()
-        wordlist = set(word for word in wordlist if len(word) > 3)
+        wordlist = set(i for i in wordlist if len(i) > args.minimum_len)
     solve(wordsearch, wordlist)
 if __name__ == '__main__':
     main()
